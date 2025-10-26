@@ -1,0 +1,33 @@
+server:
+  port: 8081   # El gateway escucha en este puerto
+
+jwt:
+  secret: 6Y1x5oz5F3X2sdu7O4g6QZkA9Xq7aPpP1rj5JfBz8nQ=
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: auth-service
+          uri: http://login-service:8082
+          predicates:
+            - Path=/auth/**
+
+
+        - id: productos-service
+          uri: http://producto-service:8083
+          predicates:
+            - Path=/api/productos/**, /api/categorias/**, /api/marcas/**, /api/reporte/**
+
+
+        - id: ordenes-service
+          uri: http://compras-service:8084
+          predicates:
+            - Path=/api/carritos/**, /api/clientes/**, /api/pedidos/**, /api/reportes/**
+
+
+        - id: notificaciones-service
+          uri: http://notificaciones-service:8085
+          predicates:
+            - Path=/api/notificaciones/**
+

@@ -1,0 +1,114 @@
+version: '3.8'
+
+services:
+
+  # ===============================
+  # API Gateway
+  # ===============================
+  api-gateway:
+    build:
+      context: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - arka-network
+
+  # ===============================
+  # Login Service
+  # ===============================
+  login-service:
+    build:
+      context: ./login-service
+    container_name: login-service
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/db_ARKA
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - arka-network
+
+  # ===============================
+  # Producto Service
+  # ===============================
+  producto-service:
+    build:
+      context: ./producto-service
+    container_name: producto-service
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/db_ARKA
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_PROFILES_ACTIVE=docker
+    volumes:
+      - "C:/Users/santi/Downloads/reportes:/app/reportes"
+    networks:
+      - arka-network
+
+  # ===============================
+  # Compras Service
+  # ===============================
+  compras-service:
+    build:
+      context: ./compras-service
+    container_name: compras-service
+    ports:
+      - "8084:8084"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5432/db_ARKA
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - arka-network
+
+  # ===============================
+  # Notificaciones Service
+  # ===============================
+  notificaciones-service:
+    build:
+      context: ./notificaciones-service
+      dockerfile: Dockerfile
+    container_name: notificaciones-service
+    ports:
+      - "8085:8085"
+    environment:
+      # Perfil
+      - SPRING_PROFILES_ACTIVE=docker
+
+      # Configuración de correo (Gmail)
+      - SPRING_MAIL_HOST=smtp.gmail.com
+      - SPRING_MAIL_PORT=587
+      - SPRING_MAIL_USERNAME=santiagoberriolopez@gmail.com
+      - SPRING_MAIL_PASSWORD=kdrz olzv iyqz kkbx
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_AUTH=true
+      - SPRING_MAIL_PROPERTIES_MAIL_SMTP_STARTTLS_ENABLE=true
+
+      # Conexión a MongoDB local (desde contenedor)
+      - SPRING_DATA_MONGODB_HOST=host.docker.internal
+      - SPRING_DATA_MONGODB_PORT=27017
+      - SPRING_DATA_MONGODB_DATABASE=Notificaciones_db
+
+      # Configuración de subida de archivos
+      - SPRING_SERVLET_MULTIPART_ENABLED=true
+      - SPRING_SERVLET_MULTIPART_MAX_FILE_SIZE=20MB
+      - SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE=20MB
+
+      # Puerto del microservicio
+      - SERVER_PORT=8085
+    networks:
+      - arka-network
+
+# ===============================
+# Definición de redes
+# ===============================
+networks:
+  arka-network:
+    driver: bridge

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/compras-service/arka-project.compras-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/compras-service/arka-project.compras-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/login-service/arka-project.login-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/login-service/arka-project.login-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/notificaciones-service/arka-project.notificaciones-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/notificaciones-service/arka-project.notificaciones-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/producto-service/arka-project.producto-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/producto-service/arka-project.producto-service.main.iml" />
+    </modules>
+  </component>
+</project>
