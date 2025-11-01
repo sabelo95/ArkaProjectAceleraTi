@@ -1,8 +1,0 @@
-rootProject.name = 'arka-project'
-
-include 'api-gateway'
-include 'common-security'
-include 'compras-service'
-include 'login-service'
-include 'notificaciones-service'
-include 'producto-service'

@@ -1,9 +1,0 @@
-server:
-  port: 8081
-
-spring:
-  data:
-    mongodb:
-      database: productos_db
-      host: localhost
-      port: 27017

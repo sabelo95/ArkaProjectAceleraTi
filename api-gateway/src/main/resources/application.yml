@@ -2,7 +2,7 @@ server:
   port: 8081   # El gateway escucha en este puerto
 
 jwt:
-  secret: 6Y1x5oz5F3X2sdu7O4g6QZkA9Xq7aPpP1rj5JfBz8nQ=
+  secret: ${JWT_SECRET}
 
 spring:
   cloud:
